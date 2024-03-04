@@ -1,20 +1,9 @@
-export function isEmpty(value: string): boolean {
-  return Boolean(!value.trim());
-}
+export const isEmpty = (value: string) => !value.trim();
 
-export function isValidInteger(value: string): boolean {
-  const parsedValue = Number(value);
-  return Boolean(Number.isInteger(parsedValue));
-}
+export const isValidInteger = (value: string) => Number.isInteger(Number(value));
 
-export function isLessThan(lessThan: number, value: number): boolean {
-  return value < lessThan;
-}
+export const isLessThan = (lessThan: number, value: number) => value < lessThan;
 
-export function isGreaterThan(greaterThan: number, value: number): boolean {
-  return value > greaterThan;
-}
+export const isGreaterThan = (greaterThan: number, value: number) => value > greaterThan;
 
-export function isEven(value: number): boolean {
-  return value % 2 === 0;
-}
+export const isEven = (value: number) => value % 2 === 0;
