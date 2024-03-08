@@ -1,9 +1,15 @@
-import { useContext } from 'react';
+import { useEffect } from 'react';
 import Product from '../components/Product';
-import { ProductContext } from '../contexts/ProductContext';
+import { useAppSelector, useAppDispatch } from '../hooks/rtk';
+import { fetchProducts, selectProducts } from '../state/productSlice';
 
 const Home = () => {
-  const { products } = useContext(ProductContext);
+  const dispatch = useAppDispatch();
+  const products = useAppSelector(selectProducts);
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
   return (
     <div>
