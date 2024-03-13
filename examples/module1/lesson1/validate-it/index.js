@@ -1,3 +1,11 @@
+import {
+  isEmpty,
+  isEven,
+  isGreaterThan,
+  isLessThan,
+  isValidInteger,
+} from './utils/validators.ts';
+
 function validator() {
   const input = document.getElementById('input');
   const button = document.getElementById('button');
@@ -5,25 +13,23 @@ function validator() {
   const result = document.getElementById('result');
 
   button.addEventListener('click', () => {
-    if (input.value) {
-      if (Number.isInteger(input.value)) {
-        if (
-          Number(input.value) > 0 &&
-          Number(input.value) < 100 &&
-          Number(input.value) % 2 === 0
-        ) {
-          result.innerHTML = 'Valid';
-        } else {
-          result.innerHTML = 'Invalid';
-        }
-        result.innerHTML = 'Valid';
-      } else {
-        result.innerHTML = 'Invalid';
-      }
-    } else {
-      result.innerHTML = 'Invalid';
-    }
+    const inputValue = input.value;
+    const isValid = validateInput(inputValue);
+    result.innerHTML = isValid ? 'Valid' : 'Invalid';
   });
+
+  function validateInput(value) {
+    if (isEmpty(value) || !isValidInteger(value)) {
+      return false;
+    }
+
+    const parsedValue = Number(value);
+    if (isGreaterThan(100, parsedValue)) return false;
+    if (isLessThan(0, parsedValue)) return false;
+    if (!isEven(parsedValue)) return false;
+
+    return true;
+  }
 
   button2.addEventListener('click', () => {
     input.value = '';
